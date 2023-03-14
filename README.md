@@ -3,7 +3,12 @@ The Interview with TodoList
 
 ![](./0ba71377-6739-433a-928b-448dd0008fed.png)
 
-语言必须Typescript、框架不限、数据库不限、接口文档
+语言 Typescript
+前端框架优先 React
+后端框架优先 Express.js Nest.js
+数据库不限
+接口文档需要实现
+
 实现一个TodoList, 可参考飞书的任务功能。
 仅需要列表、列表需要考虑TodoList的全部功能、不需要分组、不需要协作清单
 - 需要实现一下功能
