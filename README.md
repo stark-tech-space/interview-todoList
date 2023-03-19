@@ -1,7 +1,7 @@
 # interview-todoList
 The Interview with TodoList
 
-![](./0ba71377-6739-433a-928b-448dd0008fed.png)
+![](./WX20230319-183919@2x.png)
 
 - 语言 Typescript
 - 前端框架优先 React
