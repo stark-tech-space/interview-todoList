@@ -1,0 +1,18 @@
+version: "3"
+services:
+  mongo:
+    container_name: mongo
+    image: mongo:4.4
+    volumes: 
+      - ~/mongo/db:/data/db
+    ports:
+      - 27017:27017
+  app:
+    depends_on:
+      - mongo
+    container_name: todolist-service
+    restart: on-failure
+    build: ./
+    ports:
+      - 7891:7891
+  
