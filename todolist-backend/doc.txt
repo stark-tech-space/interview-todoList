@@ -1,0 +1,102 @@
+数据库表和索引：
+1. todos (model/Todo) 任务表
+字段：
+  text 内容
+  creator 创建人
+  createTime 创建时间
+  planTime 计划完成时间
+  updateTime 更新时间
+  finishTime 完成时间
+  remindTime 提醒时间
+  repeatPeriod 重复周期
+  asignees 负责人（数组）
+  followers 关注人（数组）
+  status 状态（新建，进行中，完成，删除）
+索引：
+  1) (followers，createTime) 联合索引
+  2) (followers，planTime) 联合索引
+说明：任务的创建和更新接口都包含了任务的creator和asignees将自动成为followers的逻辑，所以索引建立在了followers字段上。
+在根据creator进行过滤或排序的时候，同时也会在ollowers上设置相应的条件，以触发索引的查询。
+
+2. comments (model/Comment) 评论表
+字段：
+  content 评论内容
+  creator 评论人
+  todoId 相关任务id
+  replyTo 回复人
+  createTime 评论时间
+  updateTime 更新时间
+索引：
+  1) todoId 唯一索引
+说明：根据todoId上的索引可以查询出该任务下的所有评论。
+replyTo字段默认为任务的创建人，也可以是评论列表内的其他人。通过replyTo字段可以构建出任务下的评论列表的树形结构，满足前端展示需求。
+（但是前端暂未实现回复他人功能，只是从数据结构上保留这种可能性）
+
+3. histories (model/History) 历史记录表
+字段：
+  todoId 相关任务id
+  actionType 操作类型
+  field 字段
+  value 字段值
+  createTime 操作时间
+  operator 操作人
+索引：
+  1) todoId 唯一索引
+说明：在对任务进行创建和更新的时候会在事务内完成历史数据的记录。
+
+4. messages (model/Message) 消息表
+字段：
+  todoId 相关任务id
+  commentId 相关评论id
+  sentFrom 触发人
+  sentTo 接收人
+  createTime 触发时间
+  status 消息状态（未读，已读，删除）
+索引：
+  1) sendTo 唯一索引
+  2) status 唯一索引
+说明：在对任务进行评论的时候会在事务内完成消息的新建。
+假定提醒消息是通过前端轮询来进行查询。通过sendTo的索引可以查询出当前用户收到的所有消息，通过status的索引可以查询出当前用户的所有未读消息。
+
+5. users (model/User) 用户表
+字段：
+  nickname 用户名
+索引：由于用户相关需求不明确，没有建立用户表的索引。
+说明：在服务启动的时候，预先写了几条用户数据在用户表里。
+由于没有实现登录功能，在调用创建/更新类接口的时候，取了一条用户数据，硬编码为当前登录用户，代码中有标注。
+
+
+
+todo.service相关接口：
+
+1) async function getList(filter: ITodoFilter | null, sort: ITotoSort | null = null)
+任务的查询，支持过滤和排序，每一条任务会返回除评论以外的所有详情数据
+
+2）async function getHistory(todoId: string)
+任务历史记录的查询
+
+3) async function create(params: ITodo)
+任务的创建
+
+4) async function update(todoId: string, params: ITodo)
+任务的更新，由于任务的删除采用了伪删的方式来实现，没有提供单独的任务删除接口
+
+
+
+comment.service相关接口：
+
+1) async function get(todoId: string)
+根据任务id查询所有相关评论
+
+2) async function create(params: IComment)
+评论的创建
+
+3) async function update(commentId: string, params: IComment)
+评论的更新
+
+
+
+user.service相关接口：
+
+1) async function getList()
+所有用户的查询
