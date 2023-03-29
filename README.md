@@ -9,7 +9,7 @@ The Interview with TodoList
 - 数据库不限
 - 接口文档需要实现
 
-实现一个TodoList, 可参考飞书的任务功能。
+实现一个TodoList, 可参考[Lark](https://www.larksuite.com/)的任务功能。
 仅需要列表、列表需要考虑TodoList的全部功能、不需要分组、不需要协作清单
 - 需要实现一下功能
   - 增删改查

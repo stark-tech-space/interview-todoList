@@ -9,7 +9,7 @@ The Interview with TodoList
 - 數據庫不限
 - 接口文檔需要實現
 
-實現一個TodoList, 可參考飛書的任務功能。
+實現一個TodoList, 可參考[Lark](https://www.larksuite.com/)的任務功能。
 僅需要列表、列表需要考慮TodoList的全部功能、不需要分組、不需要協作清單
 - 需要實現一下功能
   - 增刪改查
