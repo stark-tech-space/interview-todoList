@@ -11,7 +11,7 @@ The Interview with TodoList
 
 实现一个TodoList, 可参考[Lark](https://www.larksuite.com/)的任务功能。
 仅需要列表、列表需要考虑TodoList的全部功能、不需要分组、不需要协作清单
-- 需要实现一下功能
+- 需要实现以下功能
   - 增删改查
   - 修改历史记录
   - 内容筛选（时间段、创建人）
