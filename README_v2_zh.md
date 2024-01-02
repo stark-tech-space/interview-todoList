@@ -6,8 +6,8 @@ The Interview with TodoList
 - 語言 Typescript
 - （如果是全端）前端框架優先 React
 - 後端框架優先 Nest.js
-- 資料庫不限
-- 語言文件需要實現
+- 資料庫不限語言
+- 需要實現API文件
 
 實作一個TodoList, 可參考[Lark](https://www.larksuite.com/)的任務功能。
 只需要清單、清單需要考慮TodoList的全部功能、不需要分組、不需要協作清單
